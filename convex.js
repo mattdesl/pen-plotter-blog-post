@@ -5,20 +5,20 @@ import newArray from 'new-array';
 import clustering from 'density-clustering';
 import convexHull from 'convex-hull';
 
-setSeed(16);
-Math.random = random;
+// setSeed(16);
+// Math.random = random;
 
 export const orientation = Orientation.LANDSCAPE;
 export const dimensions = PaperSize.SQUARE_POSTER;
 
-const debug = true;
+const debug = false;
 
 export default function createPlot (context, dimensions) {
   const [ width, height ] = dimensions;
   const oldPoints = [];
 
   // A large point count will produce more defined results
-  const pointCount = 500;
+  const pointCount = 40000;
   let points = newArray(pointCount).map(() => {
     const margin = 2;
     return [
@@ -32,15 +32,10 @@ export default function createPlot (context, dimensions) {
 
   // The N value for k-means clustering
   // Lower values will produce bigger chunks
-  const clusterCount = 3;
+  const clusterCount = 4;
 
   // Run our generative algorithm at 30 FPS
-  // setInterval(step, 1000 / 30);
-
-  step();
-  step();
-  step();
-  step();
+  setInterval(step, 1000 / 30);
 
   return {
     draw,
