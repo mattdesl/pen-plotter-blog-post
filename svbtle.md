@@ -1,37 +1,32 @@
 Over the last several months, I've been exploring some different ways of rendering my code and algorithms as _physical_ outputs. I'm interested in the idea of creating real, tangible objects that are no longer bound by the generative systems that created them.
 
-## Pen Plotting
-
 My interest in this began in March 2017, when I purchased my first pen plotter: the AxiDraw V3 by Evil Mad Scientist Laboratories. It's a fantastic machine, and has opened a whole new world of thinking for me. For those unaware, a pen plotter is a piece of hardware that acts like a robotic arm on which you can attach a regular pen. Software sends commands to the device to raise, reposition, and lower its arm across a 2D surface. With this, the plotter can be programmed to produce intricate and accurate prints with a pen and paper of your choice.
 
-![plotter](./images/plotter-wide.jpg)
+![plotter-wide](https://raw.githubusercontent.com/mattdesl/penplotter-example/master/images/plotter-wide.jpg?token=ABUdg7EatZH5N2RSrRVeopxrl1PLTGLMks5aUc5qwA%3D%3D)
 
-###### <sub><em>— Early prints, March 2017</em></sub>
+<sup><em>— Early prints, March 2017</em></sup>
 
 Unlike a typical printer, a plotter produces prints with a strangely human quality: occasional imperfections arise as the pen catches an edge or momentarily dries up, and the quality of the ink has the subtle texture and emboss that you normally only see in an original drawing.
 
 Often, these plotters and mechanical devices are controlled by G-code: a file format that specifies how the machine should lift, move, and place itself over time. AxiDraw handles most of the mechanical operation for you, providing a convenient SVG plugin that accepts paths, lines, shapes, and even fills (through hatching).
 
-![tess](./images/tess-v3.jpg)
-
-###### <sub><em>— Tesselations, August 2017</em></sub>
+![plotter-wide](https://raw.githubusercontent.com/mattdesl/penplotter-example/master/images/tess-v3.jpg?token=ABUdgzNPm9BIAjYEKeJkLhCE9F5P3BoMks5aUc4iwA%3D%3D)
+<sub><em>— Tesselations, August 2017</em></sub>
 
 You don't need to be a programmer to use the AxiDraw pen plotter. You can create SVG files in Adobe Illustrator or find SVGs online to print. However, the machine is very well suited to programmatic and algorithmic line art, as it can run for hours at a time and produce incredibly detailed outputs that would be too tedious to illustrate by hand. With generative programs, they can be re-run to create endless variations, each one producing a unique print.
 
 For example, my _Natural Systems_ series is 4 different algorithms, but they produce unique variations each time the algorithm is run.
 
-<!-- ![ex1](./images/ex-3.png) -->
+[![ex-1.png](https://svbtleusercontent.com/yglgzqitzhhhjq_small.png)](https://svbtleusercontent.com/yglgzqitzhhhjq.png)  
+[![ex-2.png](https://svbtleusercontent.com/fzgfbxsvt7gp9w_small.png)](https://svbtleusercontent.com/fzgfbxsvt7gp9w.png)
 
-![ex1](./images/ex-1.png)  
-![ex1](./images/ex-2.png)
-
-###### <center><sub><em>— Natural Systems, November 2017</em></sub></center>
+<sub><em>— Natural Systems, November 2017</em></sub>
 
 This isn't a new concept; Vera Molnár, an early pioneer of computer art, was rendering pen plotter prints in the 1960s. Thanks to today's software and hardware, the whole process has become much more accessible.
 
-![molnar](./images/molnar.jpg)
+[![molnar.jpg](https://svbtleusercontent.com/q0miknm8brx6sw_small.jpg)](https://svbtleusercontent.com/q0miknm8brx6sw.jpg)
 
-###### <center><sub><em>— Vera Molnár, No Title, 1968</em></sub></center>
+<sub><em>— Vera Molnár, No Title, 1968</em></sub>
 
 ## Process
 
@@ -49,11 +44,11 @@ penplot test-print.js --write --open
 
 The `--write` flag will generate a new `test-print.js` file and `--open` will launch your browser to `localhost:9966`. It starts you off with a basic print:
 
-![penplot](images/penplot.jpg)
+[![penplot.jpg](https://svbtleusercontent.com/yo4l9mjhg6vdq_small.jpg)](https://svbtleusercontent.com/yo4l9mjhg6vdq.jpg)
 
 The generated `test-file.js` file is ready to go; you can edit the ES2015 code to see changes reflected in your browser. When you are happy, hit `Cmd + S` (save PNG) or `Cmd + P` (save SVG) to export your print from the browser.
 
-> :rotating_light: This tool is highly experimental and subject to change as my workflow evolves.
+> 🚨 This tool is highly experimental and subject to change as my workflow evolves.
 
 ## Developing a Print
 
@@ -70,11 +65,11 @@ const lines = [
 ]
 ```
 
-> :bulb: Penplot scales the Canvas2D context before drawing, so all of your units should be in centimeters.
+> 💡 Penplot scales the Canvas2D context before drawing, so all of your units should be in centimeters.
 
 This creates two horizontal lines in the top left of our print, each 1 cm wide. Here, points are defined by `[ x, y ]` and a polyline (i.e. path) is defined by the points `[ a, b, c, d, .... ]`. Our list of polylines is defined as `[ A, B, ... ]`, allowing us to create multiple disconnected segments (i.e. where the pen lifts to create a new line).
 
-![code1](./images/code1.png)
+[![code1.png](https://svbtleusercontent.com/vrfsyoiy7y7q_small.png)](https://svbtleusercontent.com/vrfsyoiy7y7q.png)
 
 So far, the above code doesn't feel very intuitive, but you will hardly ever hardcode coordinates like this. Instead, you should try to think in geometric primitives: points, squares, lines, circles, triangles, etc. For example, to draw some squares in the center of the print:
 
@@ -109,9 +104,8 @@ for (let i = 0; i < 12; i++) {
 
 The result looks a bit like this:
 
-![code2](./images/code2.png)
-
-> ###### :pencil2: See [here](#) for the final source code of this print. 
+![code2.png](https://i.imgur.com/1GIBdq2.png)  
+<sup>✏️ See [here](https://google.com/) for the final source code of this print.</sup>
 
 This is starting to get a bit more interesting, but you may be wondering why not just reproduce this by hand in Illustrator. So, let's see if we can create something more complex in code.
 
@@ -378,73 +372,3 @@ Below are a few other examples after spending an evening refining and tweaking t
 ![code](./images/canvas2.png)  
 
 The "Patchwork" algorithm can also be extended to 3D, potentially for use in parametric modelling. However, that's a subject for another blog post. 
-
-<!--   -->
-
-
-<!-- 
-Once installed, you can `import` the modules into your code. In this print, we will create hundreds of randomly placed particles, and then find the Delaunay triangulation of all of them. Depending on how we distribute our random particles, we can end up with some interesting shapes.
-
-The first thing to do is to create our random points, distributed uniformly with a small margin from the edge. We use the `new-array` module so that we can use `map` instead of a for loop, and we will also import the `random` module from penplot's built-in library. This has a few functions like getting a random number distributed in a circle, sphere, or range of values. 
-
-In this case, we use `randomFloat(min, max)` to get a number between min (inclusive) and max (exclusive).
-
- ## Conclusion
-
-There's a certain satisfaction in holding generative art in the palm of your hand, and understanding that it is now completely free of the computer and code that was so necessary for its creation.
-
-
-Today, there are many others also exploring pen plotter art. I'd highly recommend following the work of Anders Hoff and Joanie Lemercier, and checking out the #plottertwitter hashtag.
-
-
-
-
-
-
-
----
-
-```js
-// Some handy functions & constants
-import { PaperSize, Orientation } from 'penplot';
-import { polylinesToSVG } from 'penplot/util/svg';
-
-// Specify the paper layout & dimensions for penplot to set up
-export const orientation = Orientation.LANDSCAPE;
-
-// Specify the paper [ width, height ] in centimeters
-export const dimensions = PaperSize.LETTER;
-
-// The plot functiond defines how the artwork will look
-export default function createPlot (context, dimensions) {
-  const [ width, height ] = dimensions;
-
-  let lines = [];
-
-  // Add [ x, y ] points to the array of lines
-  // e.g. [ [ 5, 2 ], [ 2, 3 ] ] is one line
-  ... algorithmic code ...
-
-  return {
-    draw,
-    print,
-    background: 'white' // used when exporting the canvas to PNG
-  };
-
-  function draw () {
-    lines.forEach(points => {
-      context.beginPath();
-      points.forEach(p => context.lineTo(p[0], p[1]));
-      context.stroke();
-    });
-  }
-
-  function print () {
-    return polylinesToSVG(lines, { dimensions });
-  }
-}
-```
-
-Here, all our units (including things like `context.lineWidth`) should be specified in centimeters, which makes things easier to reason about for print.
-
-This structure for `penplot` gives you a "plot" function which accepts a context and the oriented `[ width, height ]` dimension as the parameters. After setting up your plot, you return an object that contains your `draw` function (determines how your plot looks in the browser), and an optional `print` function that is up to you to implement, returning an SVG string that gets exported when pushing Cmd + P. -->
