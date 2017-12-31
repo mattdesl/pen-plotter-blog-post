@@ -1,6 +1,9 @@
 # pen-plotter-blog-post
 
-The source code and images for a two-part blog post, "Pen Plotter Art & Algorithms."
+This repo contains the source code and images for a two-part blog post, _"Pen Plotter Art & Algorithms."_ You can read the posts on my blog:
+
+- [Pen Plotter Art & Algorithms, Part 1](https://mattdesl.svbtle.com/pen-plotter-1)
+- [Pen Plotter Art & Algorithms, Part 2](https://mattdesl.svbtle.com/pen-plotter-2)
 
 ## Usage
 
@@ -13,7 +16,7 @@ Once the dependencies are installed, you can run one of the demos:
 npx penplot code/test-print.js --open
 
 # simple concentric squares
-npx penplot code/simple.js --open
+npx penplot code/squares.js --open
 
 # Delaunay triangulation example
 npx penplot code/triangulation.js --open

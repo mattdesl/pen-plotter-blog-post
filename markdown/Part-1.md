@@ -1,10 +1,10 @@
-![header](https://raw.githubusercontent.com/mattdesl/penplotter-example/master/images/header.jpg?token=ABUdg5XGpGYA44xBdNAZfGC7O4qNvTJKks5aUj4MwA%3D%3D)
+![header](https://raw.githubusercontent.com/mattdesl/pen-plotter-blog-post/master/images/header.jpg)
 
 Over the last several months, I've been looking for ways to represent my code in *physical* form. I'm interested in the idea of developing real, tangible objects that are no longer bound by the generative systems that shaped them. Eventually I plan to experiment with 3D printing, laser cutting, CNC milling, and other ways of realizing my algorithms in the real-world.
 
 My interest in this began in March 2017, when I purchased my first pen plotter: the [AxiDraw V3](https://shop.evilmadscientist.com/productsmenu/846) by Evil Mad Scientist Laboratories. It's a fantastic machine, and has opened a whole new world of thinking for me. For those unaware, a pen plotter is a piece of hardware that acts like a robotic arm on which you can attach a regular pen. Software sends commands to the device to raise, reposition, and lower its arm across a 2D surface. With this, the plotter can be programmed to produce intricate and accurate prints with a pen and paper of your choice.
 
-![plotter-wide](https://raw.githubusercontent.com/mattdesl/penplotter-example/master/images/plotter-wide.jpg?token=ABUdg7EatZH5N2RSrRVeopxrl1PLTGLMks5aUc5qwA%3D%3D)
+![plotter-wide](https://raw.githubusercontent.com/mattdesl/pen-plotter-blog-post/master/images/plotter-wide.jpg)
 
 <sup><em>— Early prints, March 2017</em></sup>
 
@@ -12,7 +12,7 @@ Unlike a typical printer, a plotter produces prints with a strangely human quali
 
 Often, these plotters and mechanical devices are controlled by G-code: a file format that specifies how the machine should lift, move, and place itself over time. For convenience, AxiDraw handles most of the mechanical operation for you, providing an Inkscape SVG plugin that accepts paths, lines, shapes, and even fills (through hatching).
 
-![plotter-wide](https://raw.githubusercontent.com/mattdesl/penplotter-example/master/images/tess-v3.jpg?token=ABUdgzNPm9BIAjYEKeJkLhCE9F5P3BoMks5aUc4iwA%3D%3D)
+![plotter-wide](https://raw.githubusercontent.com/mattdesl/pen-plotter-blog-post/master/images/tess-v3.jpg)
 
 <sub><em>— Tesselations, August 2017</em></sub>
 
@@ -20,13 +20,13 @@ You don't need to be a programmer to use the AxiDraw pen plotter. You can create
 
 For example, my *Natural Systems* series is composed of 4 different algorithms. Each time these algorithms run, they produce different outputs, allowing for an infinite number of unique prints.
 
-![natural1](https://raw.githubusercontent.com/mattdesl/penplotter-example/master/images/exb3.jpg?token=ABUdgwlXMrzb3Qiiv_VWbLtHUKoLE6Waks5aUkNrwA%3D%3D)
+![natural1](https://raw.githubusercontent.com/mattdesl/pen-plotter-blog-post/master/images/exb3.jpg)
 
 <sub><em>— Natural Systems, November 2017</em></sub>
 
 This isn't a new concept; Vera Molnár, an early pioneer of computer art, was rendering pen plotter prints in the 1960s!
 
-![molnar](https://raw.githubusercontent.com/mattdesl/penplotter-example/master/images/molnar.jpg?token=ABUdg1WNGdR58QFdxYlGhTsom72eNfCeks5aUkXxwA%3D%3D)
+![molnar](https://raw.githubusercontent.com/mattdesl/pen-plotter-blog-post/master/images/molnar.jpg)
 
 <sub><em>— Vera Molnár, No Title, 1968</em></sub>
 
@@ -50,7 +50,7 @@ penplot test-print.js --write --open
 
 The `--write` flag will generate a new `test-print.js` file and `--open` will launch your browser to `localhost:9966`. It starts you off with a basic print:
 
-![penplot](https://raw.githubusercontent.com/mattdesl/penplotter-example/master/images/penplot1.png?token=ABUdg2PVLNUPhE53XK9HL-yDShokI3UCks5aUkXZwA%3D%3D)
+![penplot](https://raw.githubusercontent.com/mattdesl/pen-plotter-blog-post/master/images/penplot1.png)
 
 <sup>✏️ See [here](https://google.com/) to see the generated source code of this print.</sup>
 
@@ -75,7 +75,7 @@ This creates two horizontal lines in the top left of our print, each 1 cm wide. 
 
 <blockquote class="large"><p style="line-height: 22px;font-size: 14px;padding-top: 3px;">📐 Penplot scales the Canvas2D context before drawing, so all of your units should be in centimeters.</p></blockquote>
 
-![code](https://raw.githubusercontent.com/mattdesl/penplotter-example/master/images/code1.png?token=ABUdgzXsioR5IPVbNyuCiEG8_ptLYTr5ks5aUkZqwA%3D%3D)
+![code](https://raw.githubusercontent.com/mattdesl/pen-plotter-blog-post/master/images/code1.png)
 
 So far, the code above doesn't feel very intuitive, but you will hardly ever hardcode coordinates like this. Instead, you should try to think in geometric primitives: points, squares, lines, circles, triangles, etc. For example, to draw some squares in the centre of the print:
 
@@ -112,7 +112,7 @@ Once the lines are in place, they are easy to render to the Canvas2D context wit
 
 The result of our code looks like this:
 
-![squares](https://raw.githubusercontent.com/mattdesl/penplotter-example/master/images/code2.png?token=ABUdg6nlxfsZ_cH5A6loWqtelU38ux76ks5aUkodwA%3D%3D)
+![squares](https://raw.githubusercontent.com/mattdesl/pen-plotter-blog-post/master/images/code2.png)
 
 <sup>✏️ See [here](https://google.com/) for the final source code of this print.</sup>
 
@@ -158,7 +158,7 @@ const positions = newArray(pointCount).map(() => {
 
 If we were to visualize our points as circles, it might look like this:
 
-![code](https://raw.githubusercontent.com/mattdesl/penplotter-example/master/images/code3.png?token=ABUdgxIiSc7t_nqFS3C7xWEY08qtVoH2ks5aUkutwA%3D%3D)
+![code](https://raw.githubusercontent.com/mattdesl/pen-plotter-blog-post/master/images/code3.png)
 
 The next step is to triangulate these points, i.e. turn them into triangles. Simply feed the array of points into the `triangulate` function and it returns a list of "cells."
 
@@ -203,17 +203,17 @@ const lines = cells.map(cell => {
 
 Now we have all the lines we need to send the SVG to AxiDraw. In the browser, hit `Cmd + S` and `Cmd + P` to save a PNG and SVG file, respectively, into your Downloads folder.
 
-![triangles](https://raw.githubusercontent.com/mattdesl/penplotter-example/master/images/code5.png?token=ABUdg_eX6J6eWb4CC7pvutC4lccOi9ykks5aUkvcwA%3D%3D)
+![triangles](https://raw.githubusercontent.com/mattdesl/pen-plotter-blog-post/master/images/code5.png)
 
 For reference, below you can see how our original random points have now become the vertices for each triangle:
 
-![code](https://raw.githubusercontent.com/mattdesl/penplotter-example/master/images/code4.png?token=ABUdg6cbC-6ZkwFvzMMKKPW_7h1gF6K6ks5aUkvowA%3D%3D)
+![code](https://raw.githubusercontent.com/mattdesl/pen-plotter-blog-post/master/images/code4.png)
 
 <blockquote class="large"><p style="line-height: 22px;font-size: 14px;padding-top: 3px;">💡 The <code class="prettyprint">random</code> module includes a <code class="prettyprint">setSeed(n)</code> function, which is useful if you want predictable randomness every time the page reloads.</p></blockquote>
 
 If we increase the `pointCount` to a higher value, we start to get a more well-defined edge, and potentially a more interesting print.
 
-![code](https://raw.githubusercontent.com/mattdesl/penplotter-example/master/images/render.png?token=ABUdgxjEIKKKf5YRtrheZgenguYEgmnEks5aUkwQwA%3D%3D)
+![code](https://raw.githubusercontent.com/mattdesl/pen-plotter-blog-post/master/images/render.png)
 
 <sup>✏️ See [here](https://google.com/) for the final source code of this print.</sup>
 
