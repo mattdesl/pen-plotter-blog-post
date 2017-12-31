@@ -1,3 +1,5 @@
+<sup><em>— Part 1</em></sup>
+
 ![header](https://raw.githubusercontent.com/mattdesl/penplotter-example/master/images/header.jpg?token=ABUdg5XGpGYA44xBdNAZfGC7O4qNvTJKks5aUj4MwA%3D%3D)
 
 Over the last several months, I've been exploring some different ways of rendering my code and algorithms with *physical* outputs. I'm interested in the idea of creating real, tangible objects that are no longer bound by the generative systems that created them.
@@ -114,17 +116,17 @@ The result looks a bit like this:
 
 This is starting to get a bit more interesting, but you may be wondering why not just reproduce this by hand in Illustrator. So, let's see if we can create something more complex in code.
 
-## Importing Libraries
+## Delaunay Triangulation
 
-A simple starting task would be to explore Delaunay triangulation. For this, we will use [delaunay-triangulate](http://npmjs.com/package/delaunay-triangulate), a robust triangulation library by Mikola Lysenko that works in 2D and 3D. We will also use the [new-array](https://www.npmjs.com/package/new-array) module, a simple array creation utility.
+A simple starting task would be to explore [Delaunay triangulation](https://en.wikipedia.org/wiki/Delaunay_triangulation). For this, we will use [delaunay-triangulate](http://npmjs.com/package/delaunay-triangulate), a robust triangulation library by Mikola Lysenko that works in 2D and 3D. We will also use the [new-array](https://www.npmjs.com/package/new-array) module, a simple array creation utility.
 
-Before we begin, you'll need to install some dependencies locally:
+Before we begin, you'll need to install these dependencies locally:
 
 ```sh
-# generate a package.json in your current folder
+# first ensure you have a package.json in your folder
 npm init -y
 
-# install some required dependencies
+# now you can install the required dependencies
 npm install delaunay-triangulate new-array
 ```
 
@@ -136,34 +138,34 @@ We use the built-in penplot `random` library here, which has the function `rando
 import newArray from 'new-array';
 import { randomFloat } from 'penplot/util/random';
 
-...
+// ...
 
-  const pointCount = 200;
-  const positions = newArray(pointCount).map(() => {
-    // Margin from print edge in centimeters
-    const margin = 2;
-    // Return a random 2D point inset by this margin
-    return [
-      randomFloat(margin, width - margin),
-      randomFloat(margin, height - margin)
-    ];
-  });
+const pointCount = 200;
+const positions = newArray(pointCount).map(() => {
+  // Margin from print edge in centimeters
+  const margin = 2;
+  // Return a random 2D point inset by this margin
+  return [
+    randomFloat(margin, width - margin),
+    randomFloat(margin, height - margin)
+  ];
+});
 ```
 
-> :bulb: I often use `new-array` and `map` to create a list of objects, as I find it more modular and functional than a for loop.
+<blockquote class="large"><p style="line-height: 22px;font-size: 14px;padding-top: 3px;">💡 I often use <code class="prettyprint">new-array</code> and <code class="prettyprint">map</code> to create a list of objects, as I find it more modular and functional than a for loop.</p></blockquote>
 
 If we were to visualize our points as circles, it might look like this:
 
-![code](./images/code3.png)
+![code](https://raw.githubusercontent.com/mattdesl/penplotter-example/master/images/code3.png?token=ABUdgxIiSc7t_nqFS3C7xWEY08qtVoH2ks5aUkutwA%3D%3D)
 
 The next step is to triangulate these points, i.e. turn them into triangles. Simply feed the array of points into the `triangulate` function and it returns a list of "cells."
 
 ```js
 import triangulate from 'delaunay-triangulate';
 
-...
+// ...
 
-  const cells = triangulate(positions);
+const cells = triangulate(positions);
 ```
 
 The return value is an array of triangles, but instead of giving us the 2D positions of each vertex in the triangle, it gives us the index into the `positions` array that we passed in.
@@ -185,7 +187,7 @@ const triangle = cells[0].map(i => positions[i]);
 console.log(triangle[0], triangle[1], triangle[2]);
 ```
 
-For the print, we want to map each triangle to a polyline that the pen plotter can render out.
+For our final print, we want to map each triangle to a polyline that the pen plotter can draw out.
 
 ```js
 const lines = cells.map(cell => {
@@ -199,28 +201,34 @@ const lines = cells.map(cell => {
 
 Now we have all the lines we need to send the SVG to AxiDraw. In the browser, hit `Cmd + S` and `Cmd + P` to save a PNG and SVG file, respectively, into your Downloads folder.
 
-![code](./images/code5.png)
+![triangles](https://raw.githubusercontent.com/mattdesl/penplotter-example/master/images/code5.png?token=ABUdg_eX6J6eWb4CC7pvutC4lccOi9ykks5aUkvcwA%3D%3D)
 
 For reference, below you can see how our original random points have now become the vertices for each triangle:
 
-![code](./images/code4.png)
+![code](https://raw.githubusercontent.com/mattdesl/penplotter-example/master/images/code4.png?token=ABUdg6cbC-6ZkwFvzMMKKPW_7h1gF6K6ks5aUkvowA%3D%3D)
 
-> :bulb: The `random` module includes a `setSeed(n)` function, which is useful if you want predictable randomness every time the page reloads.
+<blockquote class="large"><p style="line-height: 22px;font-size: 14px;padding-top: 3px;">💡 The <code class="prettyprint">random</code> module includes a <code class="prettyprint">setSeed(n)</code> function, which is useful if you want predictable randomness every time the page reloads.</p></blockquote>
 
 If we increase the `pointCount` to a higher value, we start to get a more well-defined edge, and potentially a more interesting print.
 
-![code](./images/render.png)
+![code](https://raw.githubusercontent.com/mattdesl/penplotter-example/master/images/render.png?token=ABUdgxjEIKKKf5YRtrheZgenguYEgmnEks5aUkwQwA%3D%3D)
 
-> ###### :pencil2: See [here](#) for the final source code of this print. 
+<sup>✏️ See [here](https://google.com/) for the final source code of this print.</sup>
 
-# Patchwork
+# Next Steps
+
+So far, we've explored some basic approaches to creating algorithmic pen plotter art with JavaScript. The next instalment will develop an original algorithm from the ground up.
+
+**Part Two:** [More Pen Plotter Art & Algorithms](#)
+
+# Developing an Algorithm from the Ground Up
 
 Now let's try something different and develop an algorithm that runs over time. I'm calling this algorithm "Patchwork," although I won't claim to have invented it since I'm sure many before me have discovered the same algorithm.
 
 The algorithm we will try to implement works like so:
 
 1. Start with a set of *N* initial points.
-2. Select a cluster of points and draw the convex hull that surrounds all of them.
+2. Select a cluster of points and draw the [convex hull](https://en.wikipedia.org/wiki/Convex_hull) that surrounds all of them.
 3. Remove the points contained by the convex hull from our data set.
 4. Repeat the process from step 2.
 
@@ -241,7 +249,7 @@ penplot patchwork.js --write --open
 Now, let's begin by adding the random points back in and stubbing out a `step` function for our algorithm. We also need to turn `animate` to true, so that `penplot` will start a render loop instead of just drawing one frame.
 
 ```js
-...
+// ...
 
 import { PaperSize, Orientation } from 'penplot';
 import { randomFloat } from 'penplot/util/random';
@@ -292,7 +300,7 @@ export default function createPlot (context, dimensions) {
 
 You won't see anything if you run the code, that's because our `lines` array is empty. However, we can already visualize our random points:
 
-![code](./images/code7.png)
+![code](https://raw.githubusercontent.com/mattdesl/penplotter-example/master/images/code7.png?token=ABUdgyEnUBNJh1IJWvZgMlPYu-4xtnlbks5aUk2MwA%3D%3D)
 
 Let's make it so that each time `step` runs, it adds a new polyline to the array. The next step in our algorithm is to select a cluster of points from our data set. We will use the `density-clustering` module for this, filtering the result to ensure we select a cluster with at least 3 points. Then, we sort by ascending density to select the cluster with the least number of points (i.e. the first).
 
@@ -305,7 +313,8 @@ function step () {
 
   // k-means cluster our data
   const scan = new clustering.KMEANS();
-  const clusters = scan.run(points, clusterCount).filter(c => c.length >= 3);
+  const clusters = scan.run(points, clusterCount)
+    .filter(c => c.length >= 3);
 
   // Ensure we resulted in some clusters
   if (clusters.length === 0) return;
@@ -348,32 +357,30 @@ function step () {
 
 Below, we can see what it looks like when we find the convex hull of the set of blue points.
 
-![code](./images/code8.png)
+![code](https://raw.githubusercontent.com/mattdesl/penplotter-example/master/images/code8.png?token=ABUdgzqhvwNmzJ8wH6ipKvsvIYfVnXtaks5aUk36wA%3D%3D)
 
 Once the points from that cluster are removed from the data set, we are left with a polygon in their place.
 
-![code](./images/code9.png)
+![code](https://raw.githubusercontent.com/mattdesl/penplotter-example/master/images/code9.png?token=ABUdgz-w5ziDsCn84KudcFCya_0g_ZXDks5aUk4ewA%3D%3D)
 
 As we continue stepping the algorithm forward, we end up with more polygons filling in the empty space.
 
-![code](./images/code13.png)
+![code](https://raw.githubusercontent.com/mattdesl/penplotter-example/master/images/code13.png?token=ABUdg1p9nbXHb5Ifo8t5tYSzSj3pYTwqks5aUk4twA%3D%3D)
 
 Until eventually the algorithm converges, and we can find no more suitable clusters.
 
-![code](./images/code11.png)
+![code](https://raw.githubusercontent.com/mattdesl/penplotter-example/master/images/code11.png?token=ABUdg8DlRboruIU_C_mXo_QsplZgK1Roks5aUk42wA%3D%3D)
 
 Like in the triangulation example, let's increase our `pointCount` to get a more interesting output. With a high number, like 50,000 points, we will get more detail and smoother polygons.
 
-![code](./images/code12.png)
+![code](https://raw.githubusercontent.com/mattdesl/penplotter-example/master/images/code12.png?token=ABUdg47FdYtZfpNlVXKRRaMl_CyTfAxsks5aUk5AwA%3D%3D)
 
-> ###### :pencil2: See [here](#) for the final source code of this print. 
+<sup>✏️ See [here](https://google.com/) for the final source code of this print.</sup>
 
 The real beauty in this algorithm comes from recursing it; after it converges, you can select a new polygon, fill it with points, and re-run the algorithm from step 2. After many iterations, you can end up with incredibly detailed patterns. 
 
 Below are a few other examples after spending an evening refining and tweaking the algorithm. These particular outputs use Canvas2D `fill()`, thus aren't suitable for a pen plotter.
 
-![code](./images/canvas1.png)  
-![code](./images/canvas3.png)  
-![code](./images/canvas2.png)  
+![code](https://raw.githubusercontent.com/mattdesl/penplotter-example/master/images/canvas-all.jpg?token=ABUdgxskFG_Xt85O4rCcPBv2nPZxTxC5ks5aUk6uwA%3D%3D)
 
-The "Patchwork" algorithm can also be extended to 3D, potentially for use in parametric modelling. However, that's a subject for another blog post. 
+The "Patchwork" algorithm can also be extended to 3D, potentially for use in parametric modelling. However, that's a subject for another blog post.
