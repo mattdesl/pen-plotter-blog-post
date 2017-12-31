@@ -1,6 +1,6 @@
 ![header](https://raw.githubusercontent.com/mattdesl/penplotter-example/master/images/header.jpg?token=ABUdg5XGpGYA44xBdNAZfGC7O4qNvTJKks5aUj4MwA%3D%3D)
 
-Over the last several months, I've been exploring some different ways of rendering my code and algorithms as *physical* outputs. I'm interested in the idea of creating real, tangible objects that are no longer bound by the generative systems that created them.
+Over the last several months, I've been exploring some different ways of rendering my code and algorithms with *physical* outputs. I'm interested in the idea of creating real, tangible objects that are no longer bound by the generative systems that created them.
 
 My interest in this began in March 2017, when I purchased my first pen plotter: the [AxiDraw V3](https://shop.evilmadscientist.com/productsmenu/846) by Evil Mad Scientist Laboratories. It's a fantastic machine, and has opened a whole new world of thinking for me. For those unaware, a pen plotter is a piece of hardware that acts like a robotic arm on which you can attach a regular pen. Software sends commands to the device to raise, reposition, and lower its arm across a 2D surface. With this, the plotter can be programmed to produce intricate and accurate prints with a pen and paper of your choice.
 
@@ -10,31 +10,33 @@ My interest in this began in March 2017, when I purchased my first pen plotter: 
 
 Unlike a typical printer, a plotter produces prints with a strangely human quality: occasional imperfections arise as the pen catches an edge or momentarily dries up, and the quality of the ink has the subtle texture and emboss that you normally only see in an original drawing.
 
-Often, these plotters and mechanical devices are controlled by G-code: a file format that specifies how the machine should lift, move, and place itself over time. AxiDraw handles most of the mechanical operation for you, providing a convenient SVG plugin that accepts paths, lines, shapes, and even fills (through hatching).
+Often, these plotters and mechanical devices are controlled by G-code: a file format that specifies how the machine should lift, move, and place itself over time. For convenience, AxiDraw handles most of the mechanical operation for you, providing an Inkscape SVG plugin that accepts paths, lines, shapes, and even fills (through hatching).
 
 ![plotter-wide](https://raw.githubusercontent.com/mattdesl/penplotter-example/master/images/tess-v3.jpg?token=ABUdgzNPm9BIAjYEKeJkLhCE9F5P3BoMks5aUc4iwA%3D%3D)
+
 <sub><em>— Tesselations, August 2017</em></sub>
 
-You don't need to be a programmer to use the AxiDraw pen plotter. You can create SVG files in Adobe Illustrator or find SVGs online to print. However, the machine is very well suited to programmatic and algorithmic line art, as it can run for hours at a time and produce incredibly detailed outputs that would be too tedious to illustrate by hand. With generative programs, they can be re-run to create endless variations, each one producing a unique print.
+You don't need to be a programmer to use the AxiDraw pen plotter. You can create SVG files in Adobe Illustrator or find SVGs online to print. However, the machine is very well suited to programmatic and algorithmic line art, as it can run for hours at a time and produce incredibly detailed outputs that would be too tedious to illustrate by hand. And generative programs can be re-run to create endless variations, each one producing a unique pen plotter print.
 
 For example, my *Natural Systems* series is 4 different algorithms, but they produce unique variations each time the algorithm is run.
 
-[![ex-1.png](https://svbtleusercontent.com/yglgzqitzhhhjq_small.png)](https://svbtleusercontent.com/yglgzqitzhhhjq.png)  
-[![ex-2.png](https://svbtleusercontent.com/fzgfbxsvt7gp9w_small.png)](https://svbtleusercontent.com/fzgfbxsvt7gp9w.png)
+![natural1](https://raw.githubusercontent.com/mattdesl/penplotter-example/master/images/exb3.jpg?token=ABUdgwlXMrzb3Qiiv_VWbLtHUKoLE6Waks5aUkNrwA%3D%3D)
 
 <sub><em>— Natural Systems, November 2017</em></sub>
 
-This isn't a new concept; Vera Molnár, an early pioneer of computer art, was rendering pen plotter prints in the 1960s. Thanks to today's software and hardware, the whole process has become much more accessible.
+This isn't a new concept; Vera Molnár, an early pioneer of computer art, was rendering pen plotter prints in the 1960s!
 
-[![molnar.jpg](https://svbtleusercontent.com/q0miknm8brx6sw_small.jpg)](https://svbtleusercontent.com/q0miknm8brx6sw.jpg)
+![molnar](https://raw.githubusercontent.com/mattdesl/penplotter-example/master/images/molnar.jpg?token=ABUdg1WNGdR58QFdxYlGhTsom72eNfCeks5aUkXxwA%3D%3D)
 
 <sub><em>— Vera Molnár, No Title, 1968</em></sub>
 
-## Process
+In this post, I'll try to explain some of my workflow when developing new pen plotter prints, and show some of the tools I've been building to help me organize my process.
+
+## Development Environment
 
 So far, all of my work with the AxiDraw has been with JavaScript and an experimental tool I've been building, aptly named [penplot](https://github.com/mattdesl/penplot). The tool primarily acts as a development environment, making it easier to organize and develop new prints with minimal configuration.
 
-You can try the tool out yourself with `node@8.4.x` and `npm@5.3.x` or higher
+You can try the tool out yourself with `node@8.4.x` and `npm@5.3.x` or higher.
 
 ```sh
 # install the CLI app globally
@@ -46,13 +48,13 @@ penplot test-print.js --write --open
 
 The `--write` flag will generate a new `test-print.js` file and `--open` will launch your browser to `localhost:9966`. It starts you off with a basic print:
 
-[![penplot.jpg](https://svbtleusercontent.com/yo4l9mjhg6vdq_small.jpg)](https://svbtleusercontent.com/yo4l9mjhg6vdq.jpg)
+![penplot](https://raw.githubusercontent.com/mattdesl/penplotter-example/master/images/penplot1.png?token=ABUdg2PVLNUPhE53XK9HL-yDShokI3UCks5aUkXZwA%3D%3D)
 
 The generated `test-file.js` file is ready to go; you can edit the ES2015 code to see changes reflected in your browser. When you are happy, hit `Cmd + S` (save PNG) or `Cmd + P` (save SVG) to export your print from the browser.
 
-> 🚨 This tool is highly experimental and subject to change as my workflow evolves.
+<blockquote class="large"><p style="line-height: 22px;font-size: 14px;padding-top: 3px;">🚨 This tool is highly experimental and subject to change as my workflow evolves.</p></blockquote>
 
-## Developing a Print
+## Geometry & Primitives
 
 For algorithmic work with AxiDraw and its SVG plugin, I tend to distill all my visuals into a series of polylines.
 
@@ -67,13 +69,13 @@ const lines = [
 ]
 ```
 
-> 💡 Penplot scales the Canvas2D context before drawing, so all of your units should be in centimeters.
-
 This creates two horizontal lines in the top left of our print, each 1 cm wide. Here, points are defined by `[ x, y ]` and a polyline (i.e. path) is defined by the points `[ a, b, c, d, .... ]`. Our list of polylines is defined as `[ A, B, ... ]`, allowing us to create multiple disconnected segments (i.e. where the pen lifts to create a new line).
 
-[![code1.png](https://svbtleusercontent.com/vrfsyoiy7y7q_small.png)](https://svbtleusercontent.com/vrfsyoiy7y7q.png)
+<blockquote class="large"><p style="line-height: 22px;font-size: 14px;padding-top: 3px;">📐 Penplot scales the Canvas2D context before drawing, so all of your units should be in centimeters.</p></blockquote>
 
-So far, the above code doesn't feel very intuitive, but you will hardly ever hardcode coordinates like this. Instead, you should try to think in geometric primitives: points, squares, lines, circles, triangles, etc. For example, to draw some squares in the center of the print:
+![code](https://raw.githubusercontent.com/mattdesl/penplotter-example/master/images/code1.png?token=ABUdgzXsioR5IPVbNyuCiEG8_ptLYTr5ks5aUkZqwA%3D%3D)
+
+So far, the code above doesn't feel very intuitive, but you will hardly ever hardcode coordinates like this. Instead, you should try to think in geometric primitives: points, squares, lines, circles, triangles, etc. For example, to draw some squares in the centre of the print:
 
 ```js
 // Function to create a square
@@ -106,7 +108,8 @@ for (let i = 0; i < 12; i++) {
 
 The result looks a bit like this:
 
-![code2.png](https://i.imgur.com/1GIBdq2.png)  
+![squares](https://raw.githubusercontent.com/mattdesl/penplotter-example/master/images/code2.png?token=ABUdg6nlxfsZ_cH5A6loWqtelU38ux76ks5aUkodwA%3D%3D)
+
 <sup>✏️ See [here](https://google.com/) for the final source code of this print.</sup>
 
 This is starting to get a bit more interesting, but you may be wondering why not just reproduce this by hand in Illustrator. So, let's see if we can create something more complex in code.
