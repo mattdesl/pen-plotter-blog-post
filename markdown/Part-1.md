@@ -1,3 +1,6 @@
+
+<sup><em>— You can find the source code for this blog series [here](https://github.com/mattdesl/pen-plotter-blog-post).</em></sup>
+
 ![header](https://raw.githubusercontent.com/mattdesl/pen-plotter-blog-post/master/images/header.jpg)
 
 Over the last several months, I've been looking for ways to represent my code in *physical* form. I'm interested in the idea of developing real, tangible objects that are no longer bound by the generative systems that shaped them. Eventually I plan to experiment with 3D printing, laser cutting, CNC milling, and other ways of realizing my algorithms in the real-world.
@@ -52,7 +55,7 @@ The `--write` flag will generate a new `test-print.js` file and `--open` will la
 
 ![penplot](https://raw.githubusercontent.com/mattdesl/pen-plotter-blog-post/master/images/penplot1.png)
 
-<sup>✏️ See [here](https://google.com/) to see the generated source code of this print.</sup>
+<sup>✏️ See [here](https://github.com/mattdesl/pen-plotter-blog-post/blob/master/code/test-print.js) to see the generated source code of this print.</sup>
 
 The generated `test-file.js` file is ready to go; you can edit the ES2015 code to see changes reflected in your browser. When you are happy, hit `Cmd + S` (save PNG) or `Cmd + P` (save SVG) to export your print from the browser.
 
@@ -114,7 +117,7 @@ The result of our code looks like this:
 
 ![squares](https://raw.githubusercontent.com/mattdesl/pen-plotter-blog-post/master/images/code2.png)
 
-<sup>✏️ See [here](https://google.com/) for the final source code of this print.</sup>
+<sup>✏️ See [here](https://github.com/mattdesl/pen-plotter-blog-post/blob/master/code/squares.js) for the final source code of this print.</sup>
 
 This is starting to get a bit more interesting, but you may be wondering why not just reproduce this by hand in Illustrator. So, let's see if we can create something more complex in code.
 
@@ -215,10 +218,10 @@ If we increase the `pointCount` to a higher value, we start to get a more well-d
 
 ![code](https://raw.githubusercontent.com/mattdesl/pen-plotter-blog-post/master/images/render.png)
 
-<sup>✏️ See [here](https://google.com/) for the final source code of this print.</sup>
+<sup>✏️ See [here](https://github.com/mattdesl/pen-plotter-blog-post/blob/master/code/triangulation.js) for the final source code of this print.</sup>
 
 # Part Two
 
-In the next instalment of this series, we'll attempt to reproduce a fracturing algorithm for a more original print.
+In the next instalment of this series, we'll attempt to reproduce a fracturing algorithm for a more interesting composition.
 
-**Continue reading:** [Pen Plotter Art & Algorithms, Part 2](http://google.com/)
+**Continue reading:** [Pen Plotter Art & Algorithms, Part 2](https://mattdesl.svbtle.com/pen-plotter-2)
