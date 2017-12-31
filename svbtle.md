@@ -1,6 +1,8 @@
-Over the last several months, I've been exploring some different ways of rendering my code and algorithms as _physical_ outputs. I'm interested in the idea of creating real, tangible objects that are no longer bound by the generative systems that created them.
+![header](https://raw.githubusercontent.com/mattdesl/penplotter-example/master/images/header.jpg?token=ABUdg5XGpGYA44xBdNAZfGC7O4qNvTJKks5aUj4MwA%3D%3D)
 
-My interest in this began in March 2017, when I purchased my first pen plotter: the AxiDraw V3 by Evil Mad Scientist Laboratories. It's a fantastic machine, and has opened a whole new world of thinking for me. For those unaware, a pen plotter is a piece of hardware that acts like a robotic arm on which you can attach a regular pen. Software sends commands to the device to raise, reposition, and lower its arm across a 2D surface. With this, the plotter can be programmed to produce intricate and accurate prints with a pen and paper of your choice.
+Over the last several months, I've been exploring some different ways of rendering my code and algorithms as *physical* outputs. I'm interested in the idea of creating real, tangible objects that are no longer bound by the generative systems that created them.
+
+My interest in this began in March 2017, when I purchased my first pen plotter: the [AxiDraw V3](https://shop.evilmadscientist.com/productsmenu/846) by Evil Mad Scientist Laboratories. It's a fantastic machine, and has opened a whole new world of thinking for me. For those unaware, a pen plotter is a piece of hardware that acts like a robotic arm on which you can attach a regular pen. Software sends commands to the device to raise, reposition, and lower its arm across a 2D surface. With this, the plotter can be programmed to produce intricate and accurate prints with a pen and paper of your choice.
 
 ![plotter-wide](https://raw.githubusercontent.com/mattdesl/penplotter-example/master/images/plotter-wide.jpg?token=ABUdg7EatZH5N2RSrRVeopxrl1PLTGLMks5aUc5qwA%3D%3D)
 
@@ -15,7 +17,7 @@ Often, these plotters and mechanical devices are controlled by G-code: a file fo
 
 You don't need to be a programmer to use the AxiDraw pen plotter. You can create SVG files in Adobe Illustrator or find SVGs online to print. However, the machine is very well suited to programmatic and algorithmic line art, as it can run for hours at a time and produce incredibly detailed outputs that would be too tedious to illustrate by hand. With generative programs, they can be re-run to create endless variations, each one producing a unique print.
 
-For example, my _Natural Systems_ series is 4 different algorithms, but they produce unique variations each time the algorithm is run.
+For example, my *Natural Systems* series is 4 different algorithms, but they produce unique variations each time the algorithm is run.
 
 [![ex-1.png](https://svbtleusercontent.com/yglgzqitzhhhjq_small.png)](https://svbtleusercontent.com/yglgzqitzhhhjq.png)  
 [![ex-2.png](https://svbtleusercontent.com/fzgfbxsvt7gp9w_small.png)](https://svbtleusercontent.com/fzgfbxsvt7gp9w.png)
@@ -291,7 +293,7 @@ You won't see anything if you run the code, that's because our `lines` array is 
 
 Let's make it so that each time `step` runs, it adds a new polyline to the array. The next step in our algorithm is to select a cluster of points from our data set. We will use the `density-clustering` module for this, filtering the result to ensure we select a cluster with at least 3 points. Then, we sort by ascending density to select the cluster with the least number of points (i.e. the first).
 
-Like with `triangulate()`, the density clustering returns a list of _indices_, not points, so we need to map the indices to their corresponding positions.
+Like with `triangulate()`, the density clustering returns a list of *indices*, not points, so we need to map the indices to their corresponding positions.
 
 ```js
 function step () {
