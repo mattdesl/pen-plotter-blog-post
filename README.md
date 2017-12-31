@@ -1,28 +1,27 @@
-# penplotter-example
+# pen-plotter-blog-post
 
-[![experimental](http://badges.github.io/stability-badges/dist/experimental.svg)](http://github.com/badges/stability-badges)
-
-
-
-## Install
-
-Use [npm](https://npmjs.com/) to install.
-
-```sh
-npm install penplotter-example --save
-```
+The source code and images for a two-part blog post, "Pen Plotter Art & Algorithms."
 
 ## Usage
 
-[![NPM](https://nodei.co/npm/penplotter-example.png)](https://www.npmjs.com/package/penplotter-example)
+If you want to run from source, make sure you have `node@8.4.x` and `npm@5.3.x` or higher. Then clone this repo, `cd` into it, and `npm install` to grab the dependencies.
+
+Once the dependencies are installed, you can run one of the demos:
+
+```sh
+# the default penplot print template
+npx penplot code/test-print.js --open
+
+# simple concentric squares
+npx penplot code/simple.js --open
+
+# Delaunay triangulation example
+npx penplot code/triangulation.js --open
+
+# Patchwork (fractures with convex hull + k-means clustering)
+npx penplot code/patchwork.js --open
+```
 
 ## License
 
-MIT, see [LICENSE.md](http://github.com/mattdesl/penplotter-example/blob/master/LICENSE.md) for details.
-
-
-# Thinking Physically
-
-The biggest takeaway from learning to use a pen plotter is how I am starting to think in more *physical* terms. For example, using centimetres in my algorithms rather than pixels on a screen. I've also started to discover ways of extending these algorithms into other dimensions, like exporting a parametric 3D model from JavaScript into a foldable paper model, or designing a generative artwork for a laser cutter.
-
-I hope to explore these subjects in a different blog series on 3D geometry and parametric modelling in JavaScript.
+MIT, see [LICENSE.md](http://github.com/mattdesl/pen-plotter-blog-post/blob/master/LICENSE.md) for details.

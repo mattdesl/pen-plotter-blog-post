@@ -1,12 +1,9 @@
 import { PaperSize, Orientation } from 'penplot';
 import { polylinesToSVG } from 'penplot/util/svg';
-import { randomFloat, setSeed, random } from 'penplot/util/random';
+import { randomFloat } from 'penplot/util/random';
 import newArray from 'new-array';
 import clustering from 'density-clustering';
 import convexHull from 'convex-hull';
-
-// setSeed(16);
-// Math.random = random;
 
 export const orientation = Orientation.LANDSCAPE;
 export const dimensions = PaperSize.SQUARE_POSTER;
@@ -15,10 +12,9 @@ const debug = false;
 
 export default function createPlot (context, dimensions) {
   const [ width, height ] = dimensions;
-  const oldPoints = [];
 
   // A large point count will produce more defined results
-  const pointCount = 40000;
+  const pointCount = 50000;
   let points = newArray(pointCount).map(() => {
     const margin = 2;
     return [
@@ -32,10 +28,10 @@ export default function createPlot (context, dimensions) {
 
   // The N value for k-means clustering
   // Lower values will produce bigger chunks
-  const clusterCount = 4;
+  const clusterCount = 3;
 
   // Run our generative algorithm at 30 FPS
-  setInterval(step, 1000 / 30);
+  setInterval(update, 1000 / 30);
 
   return {
     draw,
@@ -44,13 +40,14 @@ export default function createPlot (context, dimensions) {
     animate: true // start a render loop
   };
 
-  function step () {
+  function update () {
     // Not enough points in our data set
     if (points.length <= clusterCount) return;
 
     // k-means cluster our data
     const scan = new clustering.KMEANS();
-    const clusters = scan.run(points, clusterCount).filter(c => c.length >= 3);
+    const clusters = scan.run(points, clusterCount)
+      .filter(c => c.length >= 3);
 
     // Ensure we resulted in some clusters
     if (clusters.length === 0) return;
@@ -77,8 +74,6 @@ export default function createPlot (context, dimensions) {
 
     // Remove those points from our data set
     points = points.filter(p => !positions.includes(p));
-
-    positions.forEach(p => oldPoints.push(p));
   }
 
   function draw () {
@@ -89,20 +84,13 @@ export default function createPlot (context, dimensions) {
       context.stroke();
     });
 
-    // Turn on debugging if you want to see the random points
+    // Turn on debugging if you want to see the points
     if (debug) {
       points.forEach(p => {
         context.beginPath();
         context.arc(p[0], p[1], 0.2, 0, Math.PI * 2);
         context.strokeStyle = 'red';
         context.stroke();
-      });
-
-      oldPoints.forEach(p => {
-        context.beginPath();
-        context.arc(p[0], p[1], 0.2, 0, Math.PI * 2);
-        context.strokeStyle = 'blue';
-        // context.stroke();
       });
     }
   }
