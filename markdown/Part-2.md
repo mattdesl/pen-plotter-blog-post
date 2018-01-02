@@ -89,7 +89,9 @@ You won't see anything yet if you run the code, that's because our `lines` array
 
 ![code](https://raw.githubusercontent.com/mattdesl/pen-plotter-blog-post/master/images/code7.png)
 
-Let's make it so that each time `update` runs, it adds a new polyline to the array. The next step in our algorithm is to select a cluster of points from our data set. We will use the [density-clustering](https://www.npmjs.com/package/density-clustering) module for this, filtering the results to ensure we select a cluster with at least 3 points. Then, we sort by ascending density to select the cluster with the least number of points (i.e. the first).
+# Generating New Polygons
+
+Let's make it so that each time `update` runs, it adds a new polygon to the `lines` array. The second step in our algorithm is to select a cluster of points from our data set. For this we will use the [density-clustering](https://www.npmjs.com/package/density-clustering) module, filtering the results to ensure we select a cluster with at least 3 points. Then, we sort by ascending density to select the cluster with the least number of points (i.e. the first).
 
 Like with `triangulate()`, the density clustering returns lists of *indices*, not points, so we need to map the indices to their corresponding positions.
 
@@ -158,11 +160,13 @@ Until eventually the algorithm converges, and we can find no more suitable clust
 
 ![code](https://raw.githubusercontent.com/mattdesl/pen-plotter-blog-post/master/images/code11.png)
 
-Like in the triangulation example from [Part 1](https://mattdesl.svbtle.com/pen-plotter-1), let's increase our `pointCount` to get a more interesting output. With a high number, like 50,000 points, we will get more detail and smoother polygons.
+Like in the triangulation example from [Part 1](https://mattdesl.svbtle.com/pen-plotter-1), let's increase our `pointCount` to get a more refined output. With a high number, like 50,000 points, we will get more detail and smoother polygons.
 
 ![code](https://raw.githubusercontent.com/mattdesl/pen-plotter-blog-post/master/images/code12.png)
 
 <sup>✏️ See [here](https://github.com/mattdesl/pen-plotter-blog-post/blob/master/code/patchwork.js) for the final source code of this print.</sup>
+
+# Recursion
 
 The real elegance in this algorithm comes from recursing it; after it converges, you can select a new polygon, fill it with points, and re-run the algorithm again from step 2. After many iterations, you end up with incredibly detailed patterns. 
 
@@ -191,7 +195,9 @@ As you can see from the earlier 3D render, this algorithmic pen plotter work is 
 If you enjoyed this blog post, you should take a look at some other artists working with pen plotters and generative code.
 
 - [Anders Hoff](http://inconvergent.net/) (Inconvergent) writes a lot about his process in Python and Lisp.
+- [Michael Fogleman](https://medium.com/@fogleman/pen-plotter-programming-the-basics-ec0407ab5929) wrote a blog article on pen plotter basics. He's also written tools like [`ln`](https://github.com/fogleman/ln), a 3D to 2D line art engine for Go.
 - [Tyler Hobbs](http://www.tylerlhobbs.com/writings) writes about generative art and programming, and his work shares many parallels with my process here.
 - [Paul Butler](https://bitaesthetics.com/posts/surface-projection.html) recently wrote a blog post on his pen plotter work in Python.
+- [Tobias Toft](http://www.tobiastoft.com/posts/an-intro-to-pen-plotters) explains how to use Processing with traditional HP plotters. These use a different file format, but are often more affordable than the AxiDraw.
 
-You can find lots more pen plotter work through the Twitter hashtag, [#plottertwitter](https://twitter.com/search?q=%23plottertwitter&src=typd).
+You can find lots more pen plotter work through the Twitter hashtag, [#plottertwitter](https://twitter.com/hashtag/plottertwitter?src=hash).

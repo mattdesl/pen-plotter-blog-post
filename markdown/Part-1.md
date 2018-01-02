@@ -3,7 +3,7 @@
 
 ![header](https://raw.githubusercontent.com/mattdesl/pen-plotter-blog-post/master/images/header.jpg)
 
-Over the last several months, I've been looking for ways to represent my code in *physical* form. I'm interested in the idea of developing real, tangible objects that are no longer bound by the generative systems that shaped them. Eventually I plan to experiment with 3D printing, laser cutting, CNC milling, and other ways of realizing my algorithms in the real-world.
+Over the last several months, I've been looking for ways to produce *physical* outputs from my generative code. I'm interested in the idea of developing real, tangible objects that are no longer bound by the generative systems that shaped them. Eventually I plan to experiment with 3D printing, laser cutting, CNC milling, and other ways of realizing my algorithms in the real-world.
 
 My interest in this began in March 2017, when I purchased my first pen plotter: the [AxiDraw V3](https://shop.evilmadscientist.com/productsmenu/846) by Evil Mad Scientist Laboratories. It's a fantastic machine, and has opened a whole new world of thinking for me. For those unaware, a pen plotter is a piece of hardware that acts like a robotic arm on which you can attach a regular pen. Software sends commands to the device to raise, reposition, and lower its arm across a 2D surface. With this, the plotter can be programmed to produce intricate and accurate prints with a pen and paper of your choice.
 
@@ -13,7 +13,9 @@ My interest in this began in March 2017, when I purchased my first pen plotter: 
 
 Unlike a typical printer, a plotter produces prints with a strangely human quality: occasional imperfections arise as the pen catches an edge or momentarily dries up, and the quality of the ink has the subtle texture and emboss that you normally only see in an original drawing.
 
-Often, these plotters and mechanical devices are controlled by G-code: a file format that specifies how the machine should lift, move, and place itself over time. For convenience, AxiDraw handles most of the mechanical operation for you, providing an Inkscape SVG plugin that accepts paths, lines, shapes, and even fills (through hatching).
+<blockquote class="large"><p style="line-height: 22px;font-size: 14px;padding-top: 3px;">🖨 Plotters have been around for a while — if you are just starting off, you might be interested in some of the older but more affordable <a href="https://www.ebay.com/sch/i.html?_trksid=p2050601.m570.l1313.TR11.TRC1.A0.H0.Xhp+7475a&_nkw=hp+7475a&_sacat=0&_from=R40">HP plotters</a>.</p></blockquote>
+
+Often, these plotters and mechanical devices are controlled by formats like [HP-GL](https://en.wikipedia.org/wiki/HP-GL) or G-code. These formats that specify how the machine should lift, move, and place itself over time. For convenience, AxiDraw handles most of the mechanical operation for you, providing an Inkscape SVG plugin that accepts paths, lines, shapes, and even fills (through hatching).
 
 ![plotter-wide](https://raw.githubusercontent.com/mattdesl/pen-plotter-blog-post/master/images/tess-v3.jpg)
 
@@ -21,7 +23,7 @@ Often, these plotters and mechanical devices are controlled by G-code: a file fo
 
 You don't need to be a programmer to use the AxiDraw pen plotter. You can create SVG files in Adobe Illustrator or find SVGs online to print. However, the machine is very well suited to programmatic and algorithmic line art, as it can run for hours at a time and produce incredibly detailed outputs that would be too tedious to illustrate by hand.
 
-For example, my *Natural Systems* series is composed of 4 different algorithms. Each time these algorithms run, they produce different outputs, allowing for an infinite number of unique prints.
+One recent series I developed, *Natural Systems*, is composed of 4 different algorithms. Each time these algorithms run, they produce different outputs, allowing for an infinite number of unique prints.
 
 ![natural1](https://raw.githubusercontent.com/mattdesl/pen-plotter-blog-post/master/images/exb3.jpg)
 
@@ -33,7 +35,7 @@ This isn't a new concept; Vera Molnár, an early pioneer of computer art, was re
 
 <sub><em>— Vera Molnár, No Title, 1968</em></sub>
 
-In this post, I'll try to explain some of my workflow when developing new pen plotter prints, and show some of the tools I've been building to help me organize my process.
+In this post, I'll try to explain some of my workflow when developing new pen plotter prints, and show some of the tools I've been building to help organize my process.
 
 # Development Environment
 
@@ -57,7 +59,7 @@ The `--write` flag will generate a new `test-print.js` file and `--open` will la
 
 <sup>✏️ See [here](https://github.com/mattdesl/pen-plotter-blog-post/blob/master/code/test-print.js) to see the generated source code of this print.</sup>
 
-The generated `test-file.js` file is ready to go; you can edit the ES2015 code to see changes reflected in your browser. When you are happy, hit `Cmd + S` (save PNG) or `Cmd + P` (save SVG) to export your print from the browser.
+The generated `test-print.js` file is ready to go; you can edit the ES2015 code to see changes reflected in your browser. When you are happy, hit `Cmd + S` (save PNG) or `Cmd + P` (save SVG) to export your print from the browser — the files will save to your Downloads folder.
 
 # Geometry & Primitives
 
